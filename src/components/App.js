@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import styles from './App.module.scss';
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { count: 0 };
-    }
+const IncrementButton = ({ onClick }) => (
+    <button className={styles.incrementButton} onClick={onClick}>
+        Increment
+    </button>
+);
 
-    incrementCount = () => {
-        this.setState(prevState => ({ count: prevState.count + 1 }));
-    }
+const App = () => {
+    const [count, setCount] = useState(0);
 
-    render() {
-        return (
-            <div>
-                <h1>Hello, React Webpack Module!</h1>
-                <p>Count: {this.state.count}</p>
-                <button onClick={this.incrementCount}>Increment</button>
-            </div>
-        );
-    }
-}
+    const incrementCount = () => {
+        setCount(prevCount => prevCount + 1);
+    };
+
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <IncrementButton onClick={incrementCount} />
+        </div>
+    );
+};
 
 export default App;
