@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 
 module.exports = {
     entry: './src/index.js',
@@ -8,7 +9,8 @@ module.exports = {
         filename: 'index.js',
         libraryTarget: 'umd',
         library: 'ReactWebpackModule',
-        umdNamedDefine: true
+        umdNamedDefine: true,
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -43,6 +45,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
+        }),
+        new DefinePlugin({
+            'process.env.PUBLIC_URL': JSON.stringify('/')
         })
     ],
     resolve: {
