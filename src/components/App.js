@@ -1,25 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import styles from './App.module.scss';
+import { increment } from '../actions/actions';
+import logo from './logo.webp'
 
 const IncrementButton = ({ onClick }) => (
     <button className={styles.incrementButton} onClick={onClick}>
-        Increment
+        Increment count
     </button>
 );
 
-const App = () => {
-    const [count, setCount] = useState(0);
 
-    const incrementCount = () => {
-        setCount(prevCount => prevCount + 1);
-    };
+export const App = ({ count, incrementCount }) => {
 
     return (
         <div>
-            <p>Count: {count}</p>
+            <img src={logo} alt="logo" />
+            <br />
             <IncrementButton onClick={incrementCount} />
         </div>
     );
 };
 
+// const mapStateToProps = (state) => ({
+//     count: state.count
+// });
+
+// const mapDispatchToProps = {
+//     incrementCount: increment
+// };
+
 export default App;
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);

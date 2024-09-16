@@ -1,27 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './components/App';
+import store from './redux/store';
+import { increment } from './actions/actions';
 
-// Example action
-export const incrementCounter = () => ({
-    type: 'INCREMENT_COUNTER'
-});
-
-// Example reducer
-export const counterReducer = (state = { count: 0 }, action) => {
-    switch (action.type) {
-        case 'INCREMENT_COUNTER':
-            return { ...state, count: state.count + 1 };
-        default:
-            return state;
-    }
+const walletUI = {
+    App: App,  // Export the App component directly
+    increment,
+    COMPANY: "ESCSP",
 };
 
-// Export components
-export { App };
-
-// Render the App component if there's a root element
-const rootElement = document.getElementById('root');
-if (rootElement) {
-    ReactDOM.render(<App />, rootElement);
+if (typeof window !== 'undefined') {
+    window.walletUI = walletUI;
+    console.log(window.walletUI)
 }
+
+export default walletUI;
